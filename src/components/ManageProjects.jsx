@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const ManageProjects = () => {
     const { isLoaded, isSignedIn, user } = useUser();
     const { organization } = useOrganization();
+    const socket=useSelector(states=>states.socket);
     const navigate = useNavigate();
     const [projects, setProjects] = useState([]);
     const [projectDisplay, setProjectDisplay] = useState('none');
@@ -23,7 +24,7 @@ const ManageProjects = () => {
         }
     }, [isSignedIn, isLoaded, navigate]);
     async function fetchProjects() {
-        axios.get(import.meta.env.VITE_BACKEND_API_ROUTE + 'get-projects/?organizationID=' + organization.name+'('+organization.id+')')
+        axios.get(import.meta.env.VITE_BACKEND_API_ROUTE + 'get-projects/?organizationID=' + organization.name + '(' + organization.id + ')')
             .then(data => {
                 setProjects(data.data.projects);
             }).catch(error => {
@@ -36,6 +37,24 @@ const ManageProjects = () => {
             fetchProjects();
         }
     }, [user, organization])
+
+    const handleDeleteProject=(projectID,projectName,projectCreatedBy)=>{
+        if(!(projectCreatedBy===user.primaryEmailAddress.emailAddress)){
+            if(!(membership.role==='org:super_admin' || membership.role==='org:admin')){
+                alert('Sorry! You Don\'t Have Permission to Delete the Project.');
+                return;
+            }
+        }
+        axios.delete(import.meta.env.VITE_BACKEND_API_ROUTE+'delete-project/'+projectID)
+        .then(data=>{
+            alert(data.data.message);
+            if(socket){
+                socket.emit('project-deleted',organization.id,organization.name,projectID,projectName);
+            }
+        }).catch(error=>{
+            alert(error.message);
+        })
+    }
 
     if (!user) {
         return (
@@ -59,11 +78,12 @@ const ManageProjects = () => {
                         <th>Status</th>
                         <th>Due Date</th>
                         <th>Priority</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {projects.map(project => (
-                        <tr key={project._id} onClick={() => {
+                        <tr key={project._id} style={{cursor: 'pointer'}} onClick={(e) => {
                             setProjectData(project);
                             setTasks(project.tasks);
                             setProjectDisplay(projectDisplay === 'none' ? 'block' : 'none');
@@ -75,6 +95,12 @@ const ManageProjects = () => {
                             <td>{project.status}</td>
                             <td>{project.dueDate}</td>
                             <td>{project.priority}</td>
+                            <td><span class="material-symbols-outlined" onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteProject(project._id,project.name,project.createdBy);
+                            }}>
+                                delete
+                            </span></td>
                         </tr>
                     ))}
                 </tbody>

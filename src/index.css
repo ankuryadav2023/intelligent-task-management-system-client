@@ -43,10 +43,10 @@ body {
   background-color: white;
 }
 
-.work-btn:hover {
-  color: white;
-  background-color: #63d88f;
-  border: 2px solid #63d88f;
+.work-btn:hover,.work-btn:focus,.work-btn:active {
+  color: white !important;
+  background-color: #63d88f !important;
+  border: 2px solid #63d88f !important;
 }
 
 .cl-userButton-root {
@@ -85,9 +85,10 @@ body {
   background-color: #63d88f;
 }
 
-.learn-more-btn:hover {
-  background-color: #43d67c;
-  color: white;
+.learn-more-btn:hover,.learn-more-btn:focus,.learn-more-btn:active {
+  background-color: #43d67c !important;
+  border: 2px solid #43d67c !important;
+  color: white !important;
 }
 
 .feature-container {
@@ -137,11 +138,76 @@ body {
   transform: translateX(-50%);
 }
 
-.my-form2-btn:hover{
-  background-color: #75da9c;
-  border: 2px solid #63d88f;
+.my-form2-btn:hover,.my-form2-btn:focus,.my-form2-btn:active{
+  background-color: #75da9c !important;
+  border: 2px solid #63d88f !important;
 }
 
 .my-pnt-table{
   width: 95vw;
+}
+
+.chat-box {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.message {
+  max-width: 60%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f1f1f1;
+  color: black !important;
+}
+
+.d-flex.justify-content-end .message {
+  background-color: #007bff;
+  color: white;
+}
+
+.material-symbols-outlined {
+  color: red;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.chatbot {
+  z-index: 1050;
+}
+
+.chatbot-window {
+  width: 400px;
+  height: 500px;
+}
+
+.chatbot-messages {
+  max-height: calc(100% - 50px);
+}
+
+.round-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.round-button:hover{
+  background-color: #43d67c !important;
+  border: 2px solid #43d67c !important;
+}
+
+.bot-message,.peer-message p{
+  padding: 8px;
+  background-color: rgba(255, 223, 171, 0.2) !important;
+}
+
+.user-message,.your-message p{
+  padding: 8px;
+  background-color: rgba(128, 128, 128, 0.2) !important;
 }

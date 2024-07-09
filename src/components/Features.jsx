@@ -39,6 +39,22 @@ const Features = () => {
                     <p className="card-text">Users can create, update, and manage tasks within their projects. Set due dates, assign priorities, and categorize tasks by status. This feature ensures that all tasks are organized and trackable within the context of a project, enhancing team productivity and project management.</p>
                 </div>
             </div>
+            <div className="card feature-container">
+                <div className="card-header">
+                </div>
+                <div className="card-body">
+                    <h5 className="card-title">Real-Time Chat for Seamless Collaboration</h5>
+                    <p className="card-text">Enhance team collaboration with our real-time chat feature, allowing organization members to communicate instantly. Stay connected, share updates, and resolve issues quickly to ensure your projects run smoothly.</p>
+                </div>
+            </div>
+            <div className="card feature-container">
+                <div className="card-header">
+                </div>
+                <div className="card-body">
+                    <h5 className="card-title">AI-Powered Helpful Assistant</h5>
+                    <p className="card-text">Our intelligent AI assistant helps streamline your project management by suggesting names, descriptions, and much more for your projects and tasks. Enjoy a more efficient workflow and improved organization with the support of advanced AI capabilities.</p>
+                </div>
+            </div>
         </div>
     )
 }

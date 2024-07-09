@@ -15,6 +15,8 @@ import CreateProject from './components/CreateProject';
 import CreateTask from './components/CreateTask';
 import ManageProjects from './components/ManageProjects';
 import Features from './components/Features';
+import Chat from './components/Chat';
+import Chatbot from './components/Chatbot';
 
 function App() {
   return (
@@ -75,12 +77,19 @@ function App() {
           }
         />
         <Route
+          path="/chat"
+          element={
+            <Chat />
+          }
+        />
+        <Route
           path="/features"
           element={
             <Features />
           }
         />
       </Routes>
+      <Chatbot />
     </BrowserRouter>
   )
 }
